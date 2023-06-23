@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+{% if request.user.is_authenticated %}
+{% include "base/alert.html" %}
+<section style="background-color: aliceblue;" class="mt-5">
+<div class="container mt-5 pt-5">
+    <h3 style="color: rgb(0, 0, 0);">Products of sellers from your college</h3>
+    <div class="row">
+        {% for product in products %}
+        <a href="{% url 'get_products' product.slug %}">
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
+                <figcaption class="info-wrap border-top">
+                    <a href="{% url 'get_products' product.slug %}" class="title">{{product.product_name}}</a>
+                    <div class="price mt-2">Rs {{product.price}}.00</div> <!-- price-wrap.// -->
+                </figcaption>
+            </figure> <!-- card // -->
+        </div></a> <!-- col.// -->
+        
+        {% endfor %}
+    </div>
+</div> 
+{% endif %}
+
+
+<div class="container mt-5 pt-5">
+    <h3 style="color: rgb(0, 0, 0);">Other Products</h3>
+        <div class="row">
+            {% for products in all_products %}
+            <a href="{% url 'get_products' products.slug %}">
+            <div class="col-md-3">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap"> <img src="/media/{{products.product_images.first.image}}"> </div>
+                    <figcaption class="info-wrap border-top">
+                        <a href="{% url 'get_products' products.slug %}" class="title">{{products.product_name}}</a>
+                        <div class="price mt-2">Rs {{products.price}}.00</div> 
+                    </figcaption>
+                </figure> 
+            </div></a>
+            
+            {% endfor %}
+    </div>
+</div> 
+</section>
+{% endblock %}

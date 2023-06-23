@@ -1,0 +1,119 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card">
+            <div class="card-body p-4">
+  
+              <div class="row">
+  
+                <div class="col-lg-7">
+                  <h5 class="mb-3"><a href="{% url 'index' %}" class="text-body"><i
+                        class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                  <hr>
+  
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                      <p class="mb-1">Shopping cart</p>
+                      <p class="mb-0">You have {{request.user.profile.get_cart_count}} items in your cart</p>
+                    </div>
+                    <div>
+                      <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
+                          class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
+                    </div>
+                  </div>
+                  
+                  {% for cart_item in cart.cart_items.all %}
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                          <div>
+                            <img
+                              src="/media/{{cart_item.product.product_images.first.image}}"
+                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                          </div>
+                          
+                          <div class="ms-3">
+                            <h5>{{ cart_item.product.product_name }}</h5>
+                            <p class="small mb-0">256GB, Navy Blue</p>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center">
+                          <div style="width: 50px;">
+                            <h5 class="fw-normal mb-0">1</h5>
+                          </div>
+                          <div style="width: 80px;">
+                            <h5 class="mb-0">{{ cart_item.get_product_price }}</h5>
+                          </div>
+                          <a href="{% url 'remove_cart' cart_item.uid %}" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  {% endfor %}
+                </div>
+                <div class="col-lg-5">
+                  
+                  <div class="card bg-primary text-white rounded-3">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                      <form method="POST">
+                        {% include "base/alert.html" %}
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label for="coupon_input" class="text-warning">Have coupon?</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="coupon_input" name="coupon" placeholder="Coupon code">
+                            <span class="input-group-append"> 
+                              <button class="btn btn-primary" type="submit">Apply</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div> <!-- card-body.// -->
+                  </div> 
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                      {% if cart.coupon %}
+                      <p class="mb-2"><a href="{% url 'remove_coupon' cart.uid %}" class="btn btn-success">{{ cart.coupon.coupon_code }}</a>
+                        <a href="{% url 'remove_coupon' cart.uid %}" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                      </p>
+                        <p class="mb-2">-{{cart.coupon.discount_price}}</p>
+                      
+                      {% endif %}
+                    </div>
+                      <hr class="my-4">
+                      <div class="d-flex justify-content-between mb-4">
+                        <p class="mb-2">Total(Incl. taxes)</p>
+                        {% if cart.coupon %}
+                        <p class="mb-2">&#8377;{{ cart.get_cart_total|add:cart.coupon.discount_price }}</p>
+                        {% else %}
+                        <p class="mb-2">&#8377;{{ cart.get_cart_total }}</p>
+                        {% endif %}
+                      </div>
+  
+                      <button type="button" class="btn btn-info btn-block btn-lg">
+                        <div class="d-flex justify-content-between">
+                          <span>&#8377;{{ cart.get_cart_total }}</span>
+                          <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                        </div>
+                      </button>
+  
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+
+<style>
+    div.col-md-4{
+        display: inline-block;
+    }
+    label{
+      color: black;
+      font-weight: bold;
+      text-align: right;
+    }
+    
+    /* label{
+
+    } */
+</style>
+
+
+<!------ Include the above in your HEAD tag ---------->
+<!-- <center> -->
+<form class="form-horizontal" method="POST" action="{% url 'sell_product'%}">
+    {% csrf_token %}
+<fieldset>
+
+<!-- Form Name -->
+<div class="text-center bg-dark text-white mt-5"><legend style="font-size: 3rem;">ADD PRODUCTS</legend></div>
+
+
+{% include "base/alert.html" %}
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
+  <div class="col-md-4">
+  <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <div class="col-md-4">
+    <select id="product_categorie" name="category"  class="form-control">
+        <option selected disabled>Select</option>
+        {% for category in Category.all %}
+        <option value="{{category.uid}}" id="{{category.category_name}}">
+            {{category.category_name}}
+        </option>
+        {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="online_date">PRODUCT PRICE</label>  
+  <div class="col-md-4">
+  <input id="online_date" name="price" placeholder="Product price" class="form-control input-md" required type="text">
+  </div>
+</div>
+
+
+<div class="form-group">
+  <div class="">
+    <label class="col-md-4 control-label" for="online_date">PRODUCT QUALITY</label> 
+    &nbsp;
+    <label class="col-md-0">
+      <input type="radio" name="product_quality" value="5" class="product_rating" required>
+      <div class=" text-warning"> 
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+      </div>
+    </label>
+    
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <label class="col-md-0">
+      <input type="radio" name="product_quality" value="4" class="product_rating" required>
+      <div class=" text-warning"> 
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+        <i class="fa fa-star"></i> 
+      </div>
+    </label>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <label class="col-md-0">
+      <input type="radio" name="product_quality" value="3" class="product_rating" required>
+      <div class=" text-warning"> 
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+      </div>
+    </label>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <label class="col-md-0">
+      <input type="radio" name="product_quality" value="2" class="product_rating" required>
+      <div class="text-warning"> 
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+      </div>
+    </label>
+  </div>
+</div>    
+
+<!-- Text input-->
+<div class="form-group">
+  
+  <label class="col-md-4 control-label" for="product_name_fr">PRODUCT DESCRIPTION</label> 
+  <div class="col-md-4">
+    <textarea class="form-control " name="description" id="product_name_fr" placeholder="PRODUCT DESCRIPTION" rows="3"></textarea>
+  </div>
+</div>
+
+
+<!-- File Button --> 
+<div class="form-group">
+ <label class="col-md-4 control-label" for="filebutton">PRODUCT IMAGES</label>
+ <div class="col-md-4">
+   <input id="filebutton" name="images" class="input-file" multiple type="file">
+ </div>
+</div>
+
+
+
+
+
+<div class="form-group">
+    <label class="col-md-4 control-label" for="color_variant">COLOR VARIANTS</label>
+    <div class="col-md-4">
+      {% for color in ColorVariant.all %}
+     
+      <input type="checkbox"  id="{{color.uuid}}" value="{{color.uuid}}" group="colorVariant" name="color_variant" />
+      <label for="{{color.uuid}}">{{color.color_name}}</label>
+      <span class="col-md-0">&nbsp;</span>
+      {% endfor %}
+      
+    </div>
+</div>
+<div class="form-group" id="size_variant" style="display:none">
+    <label class="col-md-4 control-label"for="color_variant">SIZE VARIANTS</label>
+    <div class="col-md-4">{% for size in SizeVariant.all %}
+        <input type="checkbox" id="{{size.uuid}}" value="{{size.uuid}}" group="sizeVariant" name="size_variant" /> 
+        <label for="{{size.uuid}}">{{ size.size_name }}</label>
+        <span class="col-md-0">&nbsp;</span>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  
+  <div class="text-center">
+    <button id="singlebutton" type="submit" name="addbutton" class="btn btn-primary">Add Product</button>
+  </div>
+  </div>
+
+</fieldset>
+</form>
+<a href="{%url 'index' %}">Check Products</a>
+<script>
+
+  $(document).ready(function() {
+      $("#product_categorie").change(function() {
+          var selectedCategory = $(this).children("option:selected").attr("id");
+          var size_variant = document.getElementById("size_variant");
+          if(selectedCategory == "Cloths"){
+            size_variant.style.display = "block";
+          }
+          else{
+            size_variant.style.display = "none";
+          }
+});
+});
+</script>
+<!-- </center> -->
+{% endblock %}

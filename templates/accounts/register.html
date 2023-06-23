@@ -1,0 +1,254 @@
+{% extends "base/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/media/css/myCostum.css" type="text/css" />
+{% endblock %}
+{% block start %}
+
+<section class="h-100 h-custom gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            {% include "base/alert.html" %}
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5" style="color: #4835d4;">General Information</h3>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+                      <div class="form-outline">
+                        <input name="first_name" class="form-control form-control-lg" id="form3Examplev2" placeholder="First Name" type="text" required>
+                        <label class="form-label dark" for="form3Examplev2">First name</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-4 pb-2">
+                      <div class="form-outline">
+                        <input name="last_name" id="form3Examplev3" class="form-control  form-control-lg" placeholder="Last Name" type="text" required>
+                        <label class="form-label" for="form3Examplev3">Last name</label>
+                      </div>
+
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+                      <div class="form-outline">
+                        <input type="text" id="form3Examplev3"  class="form-control  form-control-lg" placeholder="Enter Your College Id" name="college_id" required>
+                        <label class="form-label dark" for="form3Examplev2">College Id</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-4 pb-2">
+                      <div class="form-outline">
+                        <input id="form3Examplev3" class="form-control  form-control-lg"placeholder="Enter Your College Name" name="college_name" type="text" required>
+                        <label class="form-label" for="form3Examplev3">College name</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-outline">
+                      <input name="email" id="form3Examplev3" class="form-control  form-control-lg"placeholder="Enter Your Email" type="email"  required>
+                      <label class="form-label" for="form3Examplev3">Email</label>
+                    </div>
+                  </div>
+                  <div class=" mb-4 pb-2">
+                    <div class="form-outline">
+                      <input name="password" id="form3Examplev3" class="form-control  form-control-lg" placeholder="Enter Your password" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
+                      <label class="form-label" for="form3Examplev3">Password</label>
+                    </div>
+                    <small>Must be at least 8 characters long and contain at least one letter, 
+                      one number, and one symbol (@$!%*#?&).</small>
+                  </div>
+                  
+                
+                </div>
+              </div>
+              <div class="col-lg-6 bg-indigo text-white">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5">Contact Details</h3>
+
+                  <div class="row">
+                    <div class="col-md-3 mb-4 pb-2">
+
+                      <div class="form-outline form-white">
+                        <input type="text" id="form3Examplea7" placeholder="+91" class="form-control  form-control-lg" disabled />
+                        <label class="form-label" for="form3Examplea7">Code +</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-9 mb-4 pb-2">
+
+                      <div class="form-outline form-white">
+                        <input type="tel" id="form3Examplea8" class="form-control form-control-lg" placeholder="Enter Contact Number" name="contact_number" required/>
+                        <label class="form-label" for="form3Examplea8">Phone Number</label>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="mb-4 pb-2">
+                    <div class="form-outline form-white">
+                      <input type="text" class="form-control form-control-lg" placeholder="Enter Your Street Address" name="street_address" required />
+                      <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                    </div>
+                  </div>
+                  
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-outline form-white">
+                      <label for="state">State</label>
+        <select id="state"class="form-control form-control-lg" name="state" required>
+          <option value="None" disabled selected >Select a state</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+        </select>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-7 mb-4 pb-2">
+  
+                      <div class="form-outline form-white">
+                        <label for="city">City</label>
+        <select id="city" class="form-control form-control-lg" name="city" required>
+          <option value="none" disabled selected>Please select state first to view cities.</option>
+        </select>
+                      </div>
+                    </div>
+                      
+                    <div class="col-md-5 mb-4 pb-2">
+
+                      <div class="form-outline form-white">
+                        <label for="pincode"  for="form3Examplea6" >Pincode</label>
+        <input type="tel" id="pincode" id="form3Examplea6" class="form-control   form-control-lg" placeholder="Enter Your Pincode" name="pincode" required>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="text-center">
+                  <button type="submit" class="btn col-md-5 btn-light btn-lg"
+                  data-mdb-ripple-color="dark">Register</button>
+                </div>
+                </div>
+                
+                
+                
+                
+              </div>
+            </div>
+
+            <div class="text-center gradient-custom-2">
+              <p class="text-center  pt-2 dark" style="font-size:2rem;">Already have an account?</p>
+              <a href="{% url 'login' %}" class="btn col-md-4 bg-indigo btn-light btn-lg">Sign in</a>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+      $(document).ready(function() {
+          $("#state").change(function() {
+              var selectedState = $(this).children("option:selected").val();
+  
+              // Define an object that maps states to cities
+              var cities = {
+                  "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore"],
+                  "Arunachal Pradesh": ["Itanagar", "Naharlagun"],
+                  "Assam": ["Guwahati", "Dibrugarh", "Jorhat", "Silchar"],
+                  "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur"],
+                  "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur"],
+                  "Goa": ["Panaji", "Margao", "Vasco da Gama"],
+                  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+                  "Haryana": ["Faridabad", "Gurgaon", "Hisar", "Panipat"],
+                  "Himachal Pradesh": ["Shimla", "Mandi", "Solan", "Palampur"],
+                  "Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag", "Kathua"],
+                  "Jharkhand": ["Ranchi", "Dhanbad", "Jamshedpur", "Bokaro"],
+                  "Karnataka": ["Bangalore", "Mysore", "Hubli", "Mangalore"],
+                  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],
+                  
+                  "Madhya Pradesh": ["Agar", "Alirajpur", "Anuppur", "Ashok Nagar", "Balaghat", "Badnawar", "Barwani", "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur", "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar", "Guna", "Gwalior", "Harda", "Hoshangabad", "Indore", "Itarsi", "Jabalpur", "Katni", "Khandwa", "Khargone", "Mandsaur", "Mhow Cantonment", "Mhowgaon", "Morena", "Murwara", "Nagda", "Nainpur", "Narsinghgarh", "Neemuch", "Nepanagar", "Nowgong", "Panna", "Pithampur", "Pipariya", "Porsa", "Raisen", "Ratlam", "Rewa", "Sabalgarh", "Sagar", "Sanawad", "Sarangpur", "Satna", "Sehore", "Seoni", "Seoni-Malwa", "Shahdol", "Shajapur", "Sheopur", "Shivpuri", "Sidhi", "Singrauli", "Sarni", "Sausar", "Tikamgarh", "Ujjain", "Umaria", "Vidisha"],
+
+                  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"],
+                  "Manipur": ["Imphal"],
+                  "Meghalaya": ["Shillong"],
+                  "Mizoram": ["Aizawl"],
+                  "Nagaland": ["Kohima", "Dimapur"],
+                  "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Sambalpur"],
+                  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
+                  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota"],
+                  "Sikkim": ["Gangtok"],
+                  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],
+                  "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],
+                  "Tripura": ["Agartala"],
+                  "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi"],
+                  "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Haldwani"],
+                  "West Bengal": ["Kolkata", "Asansol", "Siliguri", "Durgapur"]
+              };
+  
+              // Get the cities corresponding to the selected state and add them to the cities dropdown
+              var citiesDropdown = $("#city");
+              citiesDropdown.empty();
+              for (var i = 0; i < cities[selectedState].length; i++) {
+                if (i==0){
+                  citiesDropdown.append("<option value='none' disabled selected >Select a city </option>");
+                }
+                else{
+citiesDropdown.append("<option value='" + cities[selectedState][i] + "'>" + cities[selectedState][i] + "</option>");
+                }
+}
+});
+});
+</script>
+{% endblock %}
